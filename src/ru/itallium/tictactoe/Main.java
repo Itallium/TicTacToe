@@ -156,7 +156,7 @@ public class Main {
             //распечатка итогового вида игрового поля и выявление победителя
             PrintField();
             if(CheckGame() == 'X') System.out.println("Поздравляю, ты выиграл!");
-            if(CheckGame() == '0') System.out.println("Вы проиграли.");
+            if(CheckGame() == '0') System.out.println("Ты проиграл.");
             if(!CanMove()) System.out.println("Ходов больше нет.");
             System.out.print("\n~~~~~~~~\nХотите попробовать ещё раз? y - yes\n");
             BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
