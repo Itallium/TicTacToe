@@ -180,5 +180,6 @@ public class Main {
             } else break;
         }
         System.out.println("Спасибо, что протестировали мою игру. Надеюсь вам понравилось.");
+        System.out.print("Created by Itallium. 2013");
     }
 }
