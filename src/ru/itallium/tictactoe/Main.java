@@ -137,7 +137,7 @@ public class Main {
             if (gamer <= 0.5) {
                 System.out.println("Первым ходит компьютер.");
                 while(true) {
-                //    CompMove.move();
+                    CompMove.move();
                     if(CheckGame() != '+' || !CanMove()) break;
                     PrintField();
                     HumanMove();
@@ -153,7 +153,7 @@ public class Main {
                     PrintField();
                     HumanMove();
                     if(CheckGame() != '+' || !CanMove()) break;
-                //    CompMove.move();
+                    CompMove.move();
                     if(CheckGame() != '+' || !CanMove()) break;
                     //Тут тоже всё просто: для начала печатаем игровое поле, чтоб знать его текущее состояние.
                     //Далее ходит человек, потом проверка на победу и наличие ходов.
