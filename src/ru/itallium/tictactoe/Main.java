@@ -13,19 +13,7 @@ public class Main {
             { '+', '+', '+' }
     };
 
-    //Ход компьютера (random - бот)
-    //Бот рандомно выбирает строку и столбец до тех пор, пока не попадёт на пустую клетку.
-    public static void CompMove() {
-
-        int y = (int) Math.floor(Math.random() * 3);
-        int x = (int) Math.floor(Math.random() * 3);
-        while(field[y][x] != '+') {
-            y = (int) Math.floor(Math.random() * 3);
-            x = (int) Math.floor(Math.random() * 3);
-        }
-        field[y][x] = '0';
-
-    }
+    public static int difficulty = 1;
 
     //Ход человека
     public static void HumanMove() throws IOException {
@@ -89,6 +77,7 @@ public class Main {
         for(int i = 0; i < 3; i++) {
             if(field[i][0] == field[i][1] && field[i][1] == field[i][2]) {
                 winner = field[i][0];
+                break;
             }
         }
 
@@ -96,6 +85,7 @@ public class Main {
         for(int i = 0; i < 3; i++) {
             if(field[0][i] == field[1][i] && field[1][i] == field[2][i]) {
                 winner = field[0][i];
+                break;
             }
         }
 
@@ -119,6 +109,23 @@ public class Main {
 
         int gameCount = 1; //Номер партии
 
+        System.out.println("Выберите сложность:\n1. Random-bot\n2. Умный соперник.");
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        difficulty = Integer.parseInt(reader.readLine());
+        if(difficulty < 1 || difficulty > 2) {
+            while(difficulty < 1 || difficulty > 2) {
+                System.out.println("Вы ввели некорректные данные. Пожалуйста, повторите ввод.");
+                System.out.println("Выберите сложность:\n1. Random-bot\n2. Умный соперник.");
+                reader = new BufferedReader(new InputStreamReader(System.in));
+                difficulty = Integer.parseInt(reader.readLine());
+            }
+        }
+        if(difficulty == 1) {
+            System.out.println("Вы выбрали в соперники \"Random-bot\".");
+        } else {
+            System.out.println("\bВы выбрали в соперники \"Умный соперник\".");
+        }
+
         //Основной цикл игры. Цикл бесконечный и предназначен для того,
         //чтоб человек мог повторить партию. Чтобы выйти из такого массива используется
         //команда break.
@@ -130,7 +137,7 @@ public class Main {
             if (gamer <= 0.5) {
                 System.out.println("Первым ходит компьютер.");
                 while(true) {
-                    CompMove();
+                //    CompMove.move();
                     if(CheckGame() != '+' || !CanMove()) break;
                     PrintField();
                     HumanMove();
@@ -146,7 +153,7 @@ public class Main {
                     PrintField();
                     HumanMove();
                     if(CheckGame() != '+' || !CanMove()) break;
-                    CompMove();
+                //    CompMove.move();
                     if(CheckGame() != '+' || !CanMove()) break;
                     //Тут тоже всё просто: для начала печатаем игровое поле, чтоб знать его текущее состояние.
                     //Далее ходит человек, потом проверка на победу и наличие ходов.
@@ -159,7 +166,7 @@ public class Main {
             if(CheckGame() == '0') System.out.println("Ты проиграл.");
             if(!CanMove()) System.out.println("Ходов больше нет.");
             System.out.print("\n~~~~~~~~\nХотите попробовать ещё раз? y - yes\n");
-            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+            reader = new BufferedReader(new InputStreamReader(System.in));
             //Если пользователь введёт с клавиатуры символ 'y' и нажмёт Enter,
             //то начнётся новая игра. Если нет, то оператор break завершит основной цикл.
             if(reader.readLine().equals("y")) {
