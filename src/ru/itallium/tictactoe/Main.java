@@ -75,7 +75,7 @@ public class Main {
         char winner = '+';
         //Проверка победителя по строкам
         for(int i = 0; i < 3; i++) {
-            if(field[i][0] == field[i][1] && field[i][1] == field[i][2]) {
+            if(field[i][0] == field[i][1] && field[i][1] == field[i][2] && field[i][0] != '+') {
                 winner = field[i][0];
                 break;
             }
@@ -83,7 +83,7 @@ public class Main {
 
         //Проверка победителя по столбцам
         for(int i = 0; i < 3; i++) {
-            if(field[0][i] == field[1][i] && field[1][i] == field[2][i]) {
+            if(field[0][i] == field[1][i] && field[1][i] == field[2][i] && field[i][0] != '+') {
                 winner = field[0][i];
                 break;
             }
