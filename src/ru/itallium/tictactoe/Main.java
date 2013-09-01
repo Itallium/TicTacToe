@@ -104,13 +104,17 @@ public class Main {
 	}
 	
 	public static void doMove() throws IOException {
-
 		if (isPlayerMove) {
-            PrintField();
 			HumanMove();
 		} else {
-			CompMove.move();
+			try {
+				Thread.sleep(2000);
+				CompMove.move();
+			} catch (InterruptedException e) {
+			}
 		}
+		clearConsole();
+		PrintField();
 		toggleTurn();
 
 	}
@@ -123,6 +127,13 @@ public class Main {
 			}
 		}
 
+	}
+
+	public static void clearConsole()
+	{
+		for (int i=0;i<30;i++) {
+			System.out.println();
+		}
 	}
 
     public static void main(String[] args) throws IOException {
@@ -165,11 +176,16 @@ public class Main {
                 System.out.println("Первым ходит игрок.");
 			}
 			
+			PrintField();
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+			}
+			
 			while(CheckGame() == '+' && CanMove()) {
 				doMove();
 			}
 			
-            PrintField();
             if (!CanMove()) {
                 System.out.println("Ходов больше нет.");
             }
@@ -186,7 +202,7 @@ public class Main {
         } while(reader.readLine().equals("y"));
 		
         System.out.println("Спасибо, что протестировали мою игру. Надеюсь вам понравилось.");
-        System.out.print("Created by Itallium. 2013");
+        System.out.print("Created by Itallium. 2013\n");
 
     }
 
