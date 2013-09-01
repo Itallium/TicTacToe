@@ -15,9 +15,8 @@ public class Main {
 
     public static int difficulty = 1;
 	
-	public static bool isPlayerMove;
+	public static boolean isPlayerMove;
 
-    //Ход человека
     public static void HumanMove() throws IOException {
 
         int y = -1, x = -1;
@@ -38,14 +37,10 @@ public class Main {
                 continue;
             }
         }
-        //Так как первые условия цикла проверяют не вышли ли введённые данные за пределы поля,
-        //мы не получаем ошибки программы. Если бы первым условием мы проверяли field[y][x] != '+'
-        //то мы получили бы ошибку, так как одна из координат вышла за пределы границ field.
         field[y][x] = 'X';
 
     }
 
-    //Распечатка текущего состояния игрового поля.
     public static void PrintField() {
 
         for (int i = 0; i < 3; i++) {
@@ -57,7 +52,6 @@ public class Main {
 
     }
 
-    //Проверка на наличие ходов.
     public static boolean CanMove() {
 
         int canMove = 0;
@@ -71,7 +65,6 @@ public class Main {
 
     }
 
-    //Проверка победителя
     public static char CheckGame() {
 
         char winner = '+';
@@ -100,39 +93,41 @@ public class Main {
         if(field[0][2] == field[1][1] && field[1][1] == field[2][0]) {
             winner = field[0][2];
         }
-        //Хотелось бы отметить, что я не проверяю перед каждым циклом наличие победителя.
-        //Программа проверяет победителя после каждого хода, поэтому неоднознацных ситуаций
-        //не возникает.
         return winner;
 
     }
 	
 	public static void toggleTurn() {
+
 		isPlayerMove = isPlayerMove ? false : true;
+
 	}
 	
-	public static void doMove() {
-		PrintField();
+	public static void doMove() throws IOException {
+
 		if (isPlayerMove) {
+            PrintField();
 			HumanMove();
 		} else {
 			CompMove.move();
 		}
-		PrintField();
 		toggleTurn();
+
 	}
 	
 	public static void clearField() {
+
 		for(int i = 0; i < 3; i++) {
 			for(int j = 0; j < 3; j++) {
 				field[i][j] = '+';
 			}
 		}
+
 	}
 
     public static void main(String[] args) throws IOException {
 
-        int gameCount = 0; //Номер партии
+        int gameCount = 0;
 
         System.out.println("Выберите сложность:\n1. Random-bot\n2. Умный соперник.");
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
@@ -155,16 +150,13 @@ public class Main {
 
 		reader = new BufferedReader(new InputStreamReader(System.in));
 		
-		//Основной цикл игры исполняется хотя бы один раз и продолжается
-		//если пользователь введёт с клавиатуры символ 'y' и нажмёт Enter
         do {
+
 			gameCount++;
 			clearField();
             System.out.println("Игра №" + gameCount + " началась!");
 			
-            //Случайным образом выбираем игрока.
             float gamer = (float) Math.random();
-            //Функция Math.random() выдаёт случайное число от 0 до 1.
             if (gamer <= 0.5) {
 				isPlayerMove = false;
                 System.out.println("Первым ходит компьютер.");
@@ -177,18 +169,25 @@ public class Main {
 				doMove();
 			}
 			
-            if (!CanMove()) System.out.println("Ходов больше нет.");
+            PrintField();
+            if (!CanMove()) {
+                System.out.println("Ходов больше нет.");
+            }
 			
             if (CheckGame() == 'X') {
 				System.out.println("Поздравляю, ты выиграл!");
-			} else {
+			}
+
+            if (CheckGame() == '0') {
 				System.out.println("Ты проиграл.");
 			}
 			
             System.out.print("\n~~~~~~~~\nХотите попробовать ещё раз? y - yes\n");
-        } while(reader.readline().equals("y"));
+        } while(reader.readLine().equals("y"));
 		
         System.out.println("Спасибо, что протестировали мою игру. Надеюсь вам понравилось.");
         System.out.print("Created by Itallium. 2013");
+
     }
+
 }
