@@ -107,11 +107,7 @@ public class Main {
 		if (isPlayerMove) {
 			HumanMove();
 		} else {
-			try {
-				Thread.sleep(2000);
-				CompMove.move();
-			} catch (InterruptedException e) {
-			}
+			CompMove.move();
 		}
 		clearConsole();
 		PrintField();

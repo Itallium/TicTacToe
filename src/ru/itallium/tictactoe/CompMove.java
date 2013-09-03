@@ -6,6 +6,11 @@ public class CompMove {
     private static boolean moveComplete = false;
 
     public static void move() {
+		//Имитируем задумчивость
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+		}
 
         switch(Main.difficulty) {
             case 1:
