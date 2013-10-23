@@ -9,31 +9,31 @@ public class CompMove {
 
         switch(Main.difficulty) {
             case 1:
-                y = (int) Math.floor(Math.random() * 3);
-                x = (int) Math.floor(Math.random() * 3);
-                while(Main.field[y][x] != '+') {
-                    y = (int) Math.floor(Math.random() * 3);
-                    x = (int) Math.floor(Math.random() * 3);
+                y = (int) Math.floor(Math.random() * Field.FIELD_SIZE);
+                x = (int) Math.floor(Math.random() * Field.FIELD_SIZE);
+                while(Field.field[y][x] != Field.DEFAULT_SYMBOL) {
+                    y = (int) Math.floor(Math.random() * Field.FIELD_SIZE);
+                    x = (int) Math.floor(Math.random() * Field.FIELD_SIZE);
                 }
-                Main.field[y][x] = '0';
+                Field.field[y][x] = Field.COMPUTER_SYMBOL;
                 break;
             case 2:
                 //Отработка и закрытие незаконченных комбинаций компьютера.
                 //По строкам.
                 if(!moveComplete) {
-                    for (int i = 0; i < 3; i++) {
-                        if(Main.field[i][0] == '0' && Main.field[i][1] == '0' && Main.field[i][2] == '+') {
-                            Main.field[i][2] = '0';
+                    for (int i = 0; i < Field.FIELD_SIZE; i++) {
+                        if(Field.field[i][0] == Field.COMPUTER_SYMBOL && Field.field[i][1] == Field.COMPUTER_SYMBOL && Field.field[i][2] == Field.DEFAULT_SYMBOL) {
+                            Field.field[i][2] = Field.COMPUTER_SYMBOL;
                             moveComplete = true;
                             break;
                         }
-                        if(Main.field[i][1] == '0' && Main.field[i][2] == '0' && Main.field[i][0] == '+') {
-                            Main.field[i][0] = '0';
+                        if(Field.field[i][1] == Field.COMPUTER_SYMBOL && Field.field[i][2] == Field.COMPUTER_SYMBOL && Field.field[i][0] == Field.DEFAULT_SYMBOL) {
+                            Field.field[i][0] = Field.COMPUTER_SYMBOL;
                             moveComplete = true;
                             break;
                         }
-                        if(Main.field[i][0] == '0' && Main.field[i][2] == '0' && Main.field[i][1] == '+') {
-                            Main.field[i][1] = '0';
+                        if(Field.field[i][0] == Field.COMPUTER_SYMBOL && Field.field[i][2] == Field.COMPUTER_SYMBOL && Field.field[i][1] == Field.DEFAULT_SYMBOL) {
+                            Field.field[i][1] = Field.COMPUTER_SYMBOL;
                             moveComplete = true;
                             break;
                         }
@@ -41,19 +41,19 @@ public class CompMove {
                 }
                 //По столбцам.
                 if(!moveComplete) {
-                    for (int i = 0; i < 3; i++) {
-                        if(Main.field[0][i] == '0' && Main.field[1][i] == '0' && Main.field[2][i] == '+') {
-                            Main.field[2][i] = '0';
+                    for (int i = 0; i < Field.FIELD_SIZE; i++) {
+                        if(Field.field[0][i] == Field.COMPUTER_SYMBOL && Field.field[1][i] == Field.COMPUTER_SYMBOL && Field.field[2][i] == Field.DEFAULT_SYMBOL) {
+                            Field.field[2][i] = Field.COMPUTER_SYMBOL;
                             moveComplete = true;
                             break;
                         }
-                        if(Main.field[1][i] == '0' && Main.field[2][i] == '0' && Main.field[0][i] == '+') {
-                            Main.field[0][i] = '0';
+                        if(Field.field[1][i] == Field.COMPUTER_SYMBOL && Field.field[2][i] == Field.COMPUTER_SYMBOL && Field.field[0][i] == Field.DEFAULT_SYMBOL) {
+                            Field.field[0][i] = Field.COMPUTER_SYMBOL;
                             moveComplete = true;
                             break;
                         }
-                        if(Main.field[0][i] == '0' && Main.field[2][i] == '0' && Main.field[1][i] == '+') {
-                            Main.field[1][i] = '0';
+                        if(Field.field[0][i] == Field.COMPUTER_SYMBOL && Field.field[2][i] == Field.COMPUTER_SYMBOL && Field.field[1][i] == Field.DEFAULT_SYMBOL) {
+                            Field.field[1][i] = Field.COMPUTER_SYMBOL;
                             moveComplete = true;
                             break;
                         }
@@ -62,18 +62,18 @@ public class CompMove {
                 //По главной диагонали
                 if(!moveComplete) {
                     while(true) {
-                        if(Main.field[0][0] == '0' && Main.field[1][1] == '0' && Main.field[2][2] == '+') {
-                            Main.field[2][2] = '0';
+                        if(Field.field[0][0] == Field.COMPUTER_SYMBOL && Field.field[1][1] == Field.COMPUTER_SYMBOL && Field.field[2][2] == Field.DEFAULT_SYMBOL) {
+                            Field.field[2][2] = Field.COMPUTER_SYMBOL;
                             moveComplete = true;
                             break;
                         }
-                        if(Main.field[0][0] == '0' && Main.field[1][1] == '+' && Main.field[2][2] == '0') {
-                            Main.field[1][1] = '0';
+                        if(Field.field[0][0] == Field.COMPUTER_SYMBOL && Field.field[1][1] == Field.DEFAULT_SYMBOL && Field.field[2][2] == Field.COMPUTER_SYMBOL) {
+                            Field.field[1][1] = Field.COMPUTER_SYMBOL;
                             moveComplete = true;
                             break;
                         }
-                        if(Main.field[0][0] == '+' && Main.field[1][1] == '0' && Main.field[2][2] == '0') {
-                            Main.field[0][0] = '0';
+                        if(Field.field[0][0] == Field.DEFAULT_SYMBOL && Field.field[1][1] == Field.COMPUTER_SYMBOL && Field.field[2][2] == Field.COMPUTER_SYMBOL) {
+                            Field.field[0][0] = Field.COMPUTER_SYMBOL;
                             moveComplete = true;
                             break;
                         }
@@ -83,18 +83,18 @@ public class CompMove {
                 //По дополнительной диагонали
                 if(!moveComplete) {
                     while(true) {
-                        if(Main.field[0][2] == '0' && Main.field[1][1] == '0' && Main.field[2][0] == '+') {
-                            Main.field[2][0] = '0';
+                        if(Field.field[0][2] == Field.COMPUTER_SYMBOL && Field.field[1][1] == Field.COMPUTER_SYMBOL && Field.field[2][0] == Field.DEFAULT_SYMBOL) {
+                            Field.field[2][0] = Field.COMPUTER_SYMBOL;
                             moveComplete = true;
                             break;
                         }
-                        if(Main.field[0][2] == '0' && Main.field[1][1] == '+' && Main.field[2][0] == '0') {
-                            Main.field[1][1] = '0';
+                        if(Field.field[0][2] == Field.COMPUTER_SYMBOL && Field.field[1][1] == Field.DEFAULT_SYMBOL && Field.field[2][0] == Field.COMPUTER_SYMBOL) {
+                            Field.field[1][1] = Field.COMPUTER_SYMBOL;
                             moveComplete = true;
                             break;
                         }
-                        if(Main.field[0][2] == '+' && Main.field[1][1] == '0' && Main.field[2][0] == '0') {
-                            Main.field[0][2] = '0';
+                        if(Field.field[0][2] == Field.DEFAULT_SYMBOL && Field.field[1][1] == Field.COMPUTER_SYMBOL && Field.field[2][0] == Field.COMPUTER_SYMBOL) {
+                            Field.field[0][2] = Field.COMPUTER_SYMBOL;
                             moveComplete = true;
                             break;
                         }
@@ -103,38 +103,40 @@ public class CompMove {
                 }
                 //Отработка и закрытие незаконченных комбинаций человека.
                 //По строкам.
-                for (int i = 0; i < 3; i++) {
-                    if(Main.field[i][0] == 'X' && Main.field[i][1] == 'X' && Main.field[i][2] == '+') {
-                        Main.field[i][2] = '0';
-                        moveComplete = true;
-                        break;
-                    }
-                    if(Main.field[i][1] == 'X' && Main.field[i][2] == 'X' && Main.field[i][0] == '+') {
-                        Main.field[i][0] = '0';
-                        moveComplete = true;
-                        break;
-                    }
-                    if(Main.field[i][0] == 'X' && Main.field[i][2] == 'X' && Main.field[i][1] == '+') {
-                        Main.field[i][1] = '0';
-                        moveComplete = true;
-                        break;
+                if(!moveComplete) {
+                    for (int i = 0; i < Field.FIELD_SIZE; i++) {
+                        if(Field.field[i][0] == Field.HUMAN_SYMBOL && Field.field[i][1] == Field.HUMAN_SYMBOL && Field.field[i][2] == Field.DEFAULT_SYMBOL) {
+                            Field.field[i][2] = Field.COMPUTER_SYMBOL;
+                            moveComplete = true;
+                            break;
+                        }
+                        if(Field.field[i][1] == Field.HUMAN_SYMBOL && Field.field[i][2] == Field.HUMAN_SYMBOL && Field.field[i][0] == Field.DEFAULT_SYMBOL) {
+                            Field.field[i][0] = Field.COMPUTER_SYMBOL;
+                            moveComplete = true;
+                            break;
+                        }
+                        if(Field.field[i][0] == Field.HUMAN_SYMBOL && Field.field[i][2] == Field.HUMAN_SYMBOL && Field.field[i][1] == Field.DEFAULT_SYMBOL) {
+                            Field.field[i][1] = Field.COMPUTER_SYMBOL;
+                            moveComplete = true;
+                            break;
+                        }
                     }
                 }
                 //По столбцам.
                 if(!moveComplete) {
-                    for (int i = 0; i < 3; i++) {
-                        if(Main.field[0][i] == 'X' && Main.field[1][i] == 'X' && Main.field[2][i] == '+') {
-                            Main.field[2][i] = '0';
+                    for (int i = 0; i < Field.FIELD_SIZE; i++) {
+                        if(Field.field[0][i] == Field.HUMAN_SYMBOL && Field.field[1][i] == Field.HUMAN_SYMBOL && Field.field[2][i] == Field.DEFAULT_SYMBOL) {
+                            Field.field[2][i] = Field.COMPUTER_SYMBOL;
                             moveComplete = true;
                             break;
                         }
-                        if(Main.field[1][i] == 'X' && Main.field[2][i] == 'X' && Main.field[0][i] == '+') {
-                            Main.field[0][i] = '0';
+                        if(Field.field[1][i] == Field.HUMAN_SYMBOL && Field.field[2][i] == Field.HUMAN_SYMBOL && Field.field[0][i] == Field.DEFAULT_SYMBOL) {
+                            Field.field[0][i] = Field.COMPUTER_SYMBOL;
                             moveComplete = true;
                             break;
                         }
-                        if(Main.field[0][i] == 'X' && Main.field[2][i] == 'X' && Main.field[1][i] == '+') {
-                            Main.field[1][i] = '0';
+                        if(Field.field[0][i] == Field.HUMAN_SYMBOL && Field.field[2][i] == Field.HUMAN_SYMBOL && Field.field[1][i] == Field.DEFAULT_SYMBOL) {
+                            Field.field[1][i] = Field.COMPUTER_SYMBOL;
                             moveComplete = true;
                             break;
                         }
@@ -143,18 +145,18 @@ public class CompMove {
                 //По главной диагонали
                 if(!moveComplete) {
                     while(true) {
-                        if(Main.field[0][0] == 'X' && Main.field[1][1] == 'X' && Main.field[2][2] == '+') {
-                            Main.field[2][2] = '0';
+                        if(Field.field[0][0] == Field.HUMAN_SYMBOL && Field.field[1][1] == Field.HUMAN_SYMBOL && Field.field[2][2] == Field.DEFAULT_SYMBOL) {
+                            Field.field[2][2] = Field.COMPUTER_SYMBOL;
                             moveComplete = true;
                             break;
                         }
-                        if(Main.field[0][0] == 'X' && Main.field[1][1] == '+' && Main.field[2][2] == 'X') {
-                            Main.field[1][1] = '0';
+                        if(Field.field[0][0] == Field.HUMAN_SYMBOL && Field.field[1][1] == Field.DEFAULT_SYMBOL && Field.field[2][2] == Field.HUMAN_SYMBOL) {
+                            Field.field[1][1] = Field.COMPUTER_SYMBOL;
                             moveComplete = true;
                             break;
                         }
-                        if(Main.field[0][0] == '+' && Main.field[1][1] == 'X' && Main.field[2][2] == 'X') {
-                            Main.field[0][0] = '0';
+                        if(Field.field[0][0] == Field.DEFAULT_SYMBOL && Field.field[1][1] == Field.HUMAN_SYMBOL && Field.field[2][2] == Field.HUMAN_SYMBOL) {
+                            Field.field[0][0] = Field.COMPUTER_SYMBOL;
                             moveComplete = true;
                             break;
                         }
@@ -164,18 +166,18 @@ public class CompMove {
                 //По дополнительной диагонали
                 if(!moveComplete) {
                     while(true) {
-                        if(Main.field[0][2] == 'X' && Main.field[1][1] == 'X' && Main.field[2][0] == '+') {
-                            Main.field[2][0] = '0';
+                        if(Field.field[0][2] == Field.HUMAN_SYMBOL && Field.field[1][1] == Field.HUMAN_SYMBOL && Field.field[2][0] == Field.DEFAULT_SYMBOL) {
+                            Field.field[2][0] = Field.COMPUTER_SYMBOL;
                             moveComplete = true;
                             break;
                         }
-                        if(Main.field[0][2] == 'X' && Main.field[1][1] == '+' && Main.field[2][0] == 'X') {
-                            Main.field[1][1] = '0';
+                        if(Field.field[0][2] == Field.HUMAN_SYMBOL && Field.field[1][1] == Field.DEFAULT_SYMBOL && Field.field[2][0] == Field.HUMAN_SYMBOL) {
+                            Field.field[1][1] = Field.COMPUTER_SYMBOL;
                             moveComplete = true;
                             break;
                         }
-                        if(Main.field[0][2] == '+' && Main.field[1][1] == 'X' && Main.field[2][0] == 'X') {
-                            Main.field[0][2] = '0';
+                        if(Field.field[0][2] == Field.DEFAULT_SYMBOL && Field.field[1][1] == Field.HUMAN_SYMBOL && Field.field[2][0] == Field.HUMAN_SYMBOL) {
+                            Field.field[0][2] = Field.COMPUTER_SYMBOL;
                             moveComplete = true;
                             break;
                         }
@@ -183,13 +185,13 @@ public class CompMove {
                     }
                 }
                 if(!moveComplete) {
-                    y = (int) Math.floor(Math.random() * 3);
-                    x = (int) Math.floor(Math.random() * 3);
-                    while(Main.field[y][x] != '+') {
-                        y = (int) Math.floor(Math.random() * 3);
-                        x = (int) Math.floor(Math.random() * 3);
+                    y = (int) Math.floor(Math.random() * Field.FIELD_SIZE);
+                    x = (int) Math.floor(Math.random() * Field.FIELD_SIZE);
+                    while(Field.field[y][x] != Field.DEFAULT_SYMBOL) {
+                        y = (int) Math.floor(Math.random() * Field.FIELD_SIZE);
+                        x = (int) Math.floor(Math.random() * Field.FIELD_SIZE);
                     }
-                    Main.field[y][x] = '0';
+                    Field.field[y][x] = Field.COMPUTER_SYMBOL;
                 }
                 break;
         }
